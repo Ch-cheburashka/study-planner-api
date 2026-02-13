@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: study-planner-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: study_planner
+      POSTGRES_USER: planner
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
