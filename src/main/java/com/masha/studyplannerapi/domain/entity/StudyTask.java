@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "study-planner")
+@Table(name = "study_planner")
 public class StudyTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +53,20 @@ public class StudyTask {
 
     public StudyStatus getStatus() {
         return status;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+    public void setStatus(StudyStatus status) {
+        this.status = status;
     }
 }
