@@ -48,3 +48,10 @@ If you change DB name/user/password after the first run, re-create the volume:
 docker compose down -v
 docker compose up -d
 ```
+### 4) API Endpoints
+Tasks
+- POST /api/tasks — create a task
+- GET /api/tasks — list tasks
+- GET /api/tasks/{id} — get task by id
+- PUT /api/tasks/{id} — update task (full update)
+- DELETE /api/tasks/{id} — delete task

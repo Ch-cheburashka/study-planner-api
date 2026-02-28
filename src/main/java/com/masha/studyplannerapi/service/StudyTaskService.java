@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StudyTaskService {
@@ -25,8 +26,8 @@ public class StudyTaskService {
     public TaskResponse create(CreateTaskRequest createTaskRequest) {
         StudyTask studyTask = new StudyTask(createTaskRequest.title(), createTaskRequest.description(),
                 createTaskRequest.tag(), createTaskRequest.dueDate(), StudyStatus.TO_DO);
-        taskRepository.save(studyTask);
-        return toTaskResponse(studyTask);
+        StudyTask saved = taskRepository.save(studyTask);
+        return toTaskResponse(saved);
     }
     public TaskResponse getById(Long id) {
         StudyTask studyTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
@@ -44,13 +45,20 @@ public class StudyTaskService {
         StudyTask studyTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
 
         studyTask.setTitle(updateTaskRequest.title());
-        studyTask.setDescription(updateTaskRequest.description());
-        studyTask.setTag(updateTaskRequest.tag());
+        if (Objects.equals(updateTaskRequest.description(), "")) {
+            studyTask.setDescription(null);
+        } else
+            studyTask.setDescription(updateTaskRequest.description());
+        if (Objects.equals(updateTaskRequest.tag(), ""))
+            studyTask.setTag(null);
+        else
+            studyTask.setTag(updateTaskRequest.tag());
+
         studyTask.setDueDate(updateTaskRequest.dueDate());
         studyTask.setStatus(updateTaskRequest.status());
 
-        taskRepository.save(studyTask);
-        return toTaskResponse(studyTask);
+        StudyTask saved = taskRepository.save(studyTask);
+        return toTaskResponse(saved);
     }
     public void deleteById(Long id) {
         if (!taskRepository.existsById(id)) {
