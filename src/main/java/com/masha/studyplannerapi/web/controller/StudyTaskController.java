@@ -41,4 +41,9 @@ public class StudyTaskController {
     public void deleteById(@PathVariable Long id) {
         studyTaskService.deleteById(id);
     }
+
+    @GetMapping("/search/{keyword}")
+    public List<TaskResponse> searchTasks(@PathVariable String keyword) {
+        return studyTaskService.searchTasks(keyword);
+    }
 }

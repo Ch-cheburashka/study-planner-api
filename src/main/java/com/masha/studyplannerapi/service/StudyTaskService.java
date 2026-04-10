@@ -66,4 +66,8 @@ public class StudyTaskService {
         }
         taskRepository.deleteById(id);
     }
+
+    public List<TaskResponse> searchTasks(String keyword) {
+        return taskRepository.searchTasks(keyword);
+    }
 }
