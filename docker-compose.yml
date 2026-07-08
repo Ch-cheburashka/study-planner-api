@@ -1,4 +1,15 @@
 services:
+  app:
+    build: .
+    container_name: study-planner-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/study_planner
+      SPRING_DATASOURCE_USERNAME: planner
+      SPRING_DATASOURCE_PASSWORD: secret
   db:
     image: postgres:16
     container_name: study-planner-db
