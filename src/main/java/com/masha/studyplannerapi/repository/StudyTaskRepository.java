@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface StudyTaskRepository extends JpaRepository<StudyTask, Long> {
     @Query("SELECT t from StudyTask t WHERE " + "LOWER(t.title) LIKE LOWER(CONCAT('%', :keyword, '%'))")
-    List<TaskResponse> searchTasks(String keyword);
+    List<StudyTask> searchTasks(String keyword);
 }

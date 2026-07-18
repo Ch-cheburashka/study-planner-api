@@ -7,6 +7,8 @@ public record CreateTaskRequest(
         @NotBlank(message = "title must be not empty") String title,
         String description,
         String tag,
-        @FutureOrPresent LocalDate dueDate
+        @NotNull
+        @FutureOrPresent
+        LocalDate dueDate
 ) {
 }
