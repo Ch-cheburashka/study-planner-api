@@ -15,6 +15,7 @@ public class StudyTask {
     private String title;
     private String description;
     private String tag;
+    @Column(nullable = false)
     private LocalDate dueDate;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
