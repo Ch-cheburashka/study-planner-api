@@ -11,7 +11,6 @@
 ## Search
 
 - Need to handle empty or blank keyword.
-- Need test coverage for search behavior.
 
 ## Validation / Error handling
 
@@ -22,9 +21,6 @@
 - Need consistent format for validation errors, not found errors and invalid JSON.
 
 ## HTTP semantics
-
-- POST currently returns response body, but later could return `201 Created`.
-- DELETE currently returns void, but later could return `204 No Content`.
 - Need to decide whether PUT should be full update or whether PATCH should be added later.
 
 ## API documentation

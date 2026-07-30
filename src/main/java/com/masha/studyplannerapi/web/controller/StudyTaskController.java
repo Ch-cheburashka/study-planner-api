@@ -5,8 +5,11 @@ import com.masha.studyplannerapi.web.dto.CreateTaskRequest;
 import com.masha.studyplannerapi.web.dto.TaskResponse;
 import com.masha.studyplannerapi.web.dto.UpdateTaskRequest;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -18,8 +21,10 @@ public class StudyTaskController {
     }
 
     @PostMapping({"", "/"})
-    public TaskResponse create(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
-        return studyTaskService.create(createTaskRequest);
+    public ResponseEntity<TaskResponse> create(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
+        TaskResponse createdTask = studyTaskService.create(createTaskRequest);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdTask.id()).toUri();
+        return ResponseEntity.created(location).body(createdTask);
     }
 
     @GetMapping("/{id}")
@@ -38,8 +43,9 @@ public class StudyTaskController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         studyTaskService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/search/{keyword}")
