@@ -23,9 +23,9 @@ public class GlobalExceptionHandler {
         Map<String, Object> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
                 .collect(Collectors.toMap(
                         FieldError::getField,
-                        FieldError::getDefaultMessage,
-                        (msg1, msg2) -> msg1 + "; " + msg2 // Объединяем ошибки, если их несколько для одного поля
-                ));
+                        FieldError::getDefaultMessage, (msg1, msg2) -> msg1 + "; " + msg2
+                        )
+                );
 
         return new ApiError(
                 LocalDateTime.now(),

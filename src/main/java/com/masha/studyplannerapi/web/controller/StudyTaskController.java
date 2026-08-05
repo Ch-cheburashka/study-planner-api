@@ -20,7 +20,7 @@ public class StudyTaskController {
         this.studyTaskService = studyTaskService;
     }
 
-    @PostMapping({"", "/"})
+    @PostMapping
     public ResponseEntity<TaskResponse> create(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
         TaskResponse createdTask = studyTaskService.create(createTaskRequest);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdTask.id()).toUri();
