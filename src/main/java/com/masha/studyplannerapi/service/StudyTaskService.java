@@ -9,9 +9,7 @@ import com.masha.studyplannerapi.web.dto.TaskResponse;
 import com.masha.studyplannerapi.web.dto.UpdateTaskRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class StudyTaskService {
@@ -45,12 +43,7 @@ public class StudyTaskService {
         return toTaskResponse(studyTask);
     }
     public List<TaskResponse> getAll() {
-        List<StudyTask> studyTasks = taskRepository.findAll();
-        List<TaskResponse> taskResponses = new ArrayList<>();
-        for (StudyTask studyTask : studyTasks) {
-            taskResponses.add(toTaskResponse(studyTask));
-        }
-        return taskResponses;
+        return taskRepository.findAll().stream().map(this::toTaskResponse).toList();
     }
     public TaskResponse update(Long id, UpdateTaskRequest updateTaskRequest) {
         StudyTask studyTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
